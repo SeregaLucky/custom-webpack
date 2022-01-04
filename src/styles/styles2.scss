@@ -1,0 +1,7 @@
+@mixin color-h2 {
+  color: salmon;
+}
+
+h2 {
+  @include color-h2;
+}

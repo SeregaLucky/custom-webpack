@@ -1,0 +1,6 @@
+{
+  // "targets": {
+  //   "ie": "11"
+  // },
+  "presets": ["@babel/preset-env"]
+}
