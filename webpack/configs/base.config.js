@@ -22,6 +22,7 @@ module.exports = (env, args) => {
       publicPath: '',
       clean: true,
       // assetModuleFilename: '[path]/[name].[ext]',
+      assetModuleFilename: 'images/[name].[ext]',
     },
 
     module: {
