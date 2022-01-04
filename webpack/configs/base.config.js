@@ -1,4 +1,3 @@
-const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const paths = require('../utils/paths');
 
@@ -14,11 +13,9 @@ module.exports = (env, args) => {
     target: ['web', 'es5'],
     context: paths.SRC_DIR,
 
-    // entry: './src/index.js',
     entry: './index.js',
 
     output: {
-      // path: path.resolve(__dirname, '../../build'),
       path: paths.BUILD_DIR,
       filename: prodMode
         ? './[name].[contenthash].bundle.js'
@@ -45,7 +42,6 @@ module.exports = (env, args) => {
     plugins: [
       new HtmlWebpackPlugin({
         filename: prodMode ? 'index.[contenthash].html' : 'index.html',
-        // template: './src/index.html',
         template: './index.html',
         inject: 'body',
         minify: prodMode,
