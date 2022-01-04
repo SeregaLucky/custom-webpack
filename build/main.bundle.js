@@ -1,2 +1,2 @@
-"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[179],{120:function(){var o="Mes test";console.log(o),console.log(o),console.log(o),console.log(o),console.log(o)}},function(o){var s;s=120,o(o.s=s)}]);
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[179],{120:function(){console.log("Mes test")}},function(s){var e;e=120,s(s.s=e)}]);
 //# sourceMappingURL=main.bundle.js.map

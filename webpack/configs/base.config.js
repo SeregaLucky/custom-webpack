@@ -36,6 +36,18 @@ module.exports = (env, args) => {
           include: /src/,
           use: ['babel-loader'],
         },
+        {
+          test: /\.svg$/,
+          loader: 'svg-inline-loader',
+        },
+        {
+          test: /\.(?:ico|gif|png|jpg|jpeg)$/,
+          type: 'asset/resource',
+        },
+        {
+          test: /\.(woff(2)?|eot|ttf|otf|)$/,
+          type: 'asset/inline',
+        },
       ],
     },
 
