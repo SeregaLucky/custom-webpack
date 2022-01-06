@@ -1,5 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { EnvironmentPlugin } = require('webpack');
+const { EnvironmentPlugin, ProvidePlugin } = require('webpack');
 const Dotenv = require('dotenv-webpack');
 const paths = require('../utils/paths');
 const modes = require('../utils/modes');
@@ -14,6 +14,14 @@ module.exports = (env, args) => {
     stats: 'minimal',
     devtool: prodMode ? 'source-map' : 'eval-cheap-source-map',
     context: paths.SRC_DIR,
+    // process: '0.11.10',
+
+    resolve: {
+      // extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      // alias: {
+      //   process: 'process/browser',
+      // },
+    },
 
     entry: './index.js',
 
@@ -70,6 +78,10 @@ module.exports = (env, args) => {
         minify: prodMode,
       }),
 
+      new ProvidePlugin({
+        process: 'process/browser',
+      }),
+
       /* Прям на прямую без файла .env записать в process.env */
       new EnvironmentPlugin({
         API: 'https://...',
@@ -78,7 +90,7 @@ module.exports = (env, args) => {
       /* Берет с файла .env */
       new Dotenv(),
       // new Dotenv({
-      //   // path: './some.other.env', // load this now instead of the ones in '.env'
+      //   path: '../../.env', // load this now instead of the ones in '.env'
       //   // safe: true, // load '.env.example' to verify the '.env' variables are all set. Can also be a string to a different file.
       //   // allowEmptyValues: true, // allow empty variables (e.g. `FOO=`) (treat it as empty string, rather than missing)
       //   // systemvars: true, // load all the predefined 'process.env' variables which will trump anything local per dotenv specs.

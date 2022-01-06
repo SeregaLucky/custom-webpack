@@ -24,9 +24,10 @@ document.querySelector('.contCat').append(img);
 document.querySelector('.contSvg').insertAdjacentHTML('beforeend', santa);
 
 /* WATCH CUSTOM VALUE IN PROCESS.ENV */
+console.log(111111111, window.process);
 console.log(111111111, process);
 // const { MY_PASSWORD = 1, API = 1 } = process.env;
 // console.log('MY_PASSWORD', MY_PASSWORD);
 // console.log('API', API);
 
-console.log('aaa', aaa);
+// console.log('aaa', aaa);
