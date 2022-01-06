@@ -1,21 +1,19 @@
 {
+  "parser": "@babel/eslint-parser",
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "node": true
   },
-  // "extends": ["eslint:recommended", "prettier", "plugin:prettier/recommended"],
   "extends": ["eslint:recommended", "prettier"],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
   "rules": {
+    "arrow-body-style": "off",
+    "prefer-arrow-callback": "off",
     "no-unused-vars": 1
   },
-  "globals": {
-    "module": true,
-    "__dirname": true,
-    "require": true,
-    "process": true
-  }
+  "globals": {}
 }
