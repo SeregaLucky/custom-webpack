@@ -1,25 +1,25 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { EnvironmentPlugin } = require('webpack');
+const Dotenv = require('dotenv-webpack');
 const paths = require('../utils/paths');
+const modes = require('../utils/modes');
 
 module.exports = (env, args) => {
   const { mode } = args;
 
-  const prodMode = mode === process.env.production;
+  const prodMode = mode === modes.PRODUCTION;
 
   return {
     mode,
     stats: 'minimal',
     devtool: prodMode ? 'source-map' : 'eval-cheap-source-map',
-    target: ['web', 'es5'],
     context: paths.SRC_DIR,
 
     entry: './index.js',
 
     output: {
       path: paths.BUILD_DIR,
-      filename: prodMode
-        ? './[name].[contenthash].bundle.js'
-        : './[name].bundle.js',
+      filename: prodMode ? 'js/[name].[contenthash].js' : './[name].bundle.js',
       publicPath: '',
       clean: true,
       assetModuleFilename: 'images/[name].[ext]',
@@ -37,6 +37,7 @@ module.exports = (env, args) => {
           use: ['babel-loader'],
         },
         {
+          /* Кладет все svg в бандл */
           test: /\.svg$/,
           loader: 'svg-inline-loader',
         },
@@ -46,7 +47,17 @@ module.exports = (env, args) => {
         },
         {
           test: /\.(woff(2)?|eot|ttf|otf|)$/,
-          type: 'asset/inline',
+          // type: 'asset/inline',
+          type: 'asset',
+          parser: {
+            dataUrlCondition: {
+              maxSize: 30 * 1024, // 30 KB
+            },
+          },
+        },
+        {
+          test: /\.txt$/,
+          type: 'asset/source',
         },
       ],
     },
@@ -58,6 +69,22 @@ module.exports = (env, args) => {
         inject: 'body',
         minify: prodMode,
       }),
+
+      /* Прям на прямую без файла .env записать в process.env */
+      new EnvironmentPlugin({
+        API: 'https://...',
+      }),
+
+      /* Берет с файла .env */
+      new Dotenv(),
+      // new Dotenv({
+      //   // path: './some.other.env', // load this now instead of the ones in '.env'
+      //   // safe: true, // load '.env.example' to verify the '.env' variables are all set. Can also be a string to a different file.
+      //   // allowEmptyValues: true, // allow empty variables (e.g. `FOO=`) (treat it as empty string, rather than missing)
+      //   // systemvars: true, // load all the predefined 'process.env' variables which will trump anything local per dotenv specs.
+      //   // silent: true, // hide any errors
+      //   // defaults: false, // load '.env.defaults' as the default values if empty.
+      // }),
     ],
   };
 };

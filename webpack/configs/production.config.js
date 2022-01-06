@@ -9,6 +9,9 @@ module.exports = () => {
 
     module: {
       rules: [
+        // {
+        //   sideEffects: true, // выключает тришейкинг! УДАЛИТЬ!!!!
+        // },
         {
           test: /\.js$/,
           include: /src/,
@@ -32,14 +35,17 @@ module.exports = () => {
 
     plugins: [
       new MiniCssExtractPlugin({
-        filename: '[name].[contenthash].css',
+        filename: 'styles/[name].[contenthash].css',
         chunkFilename: '[name].[id].[contenthash].css',
       }),
     ],
 
     optimization: {
       moduleIds: 'deterministic',
-      runtimeChunk: 'single',
+      // runtimeChunk: 'single',
+      runtimeChunk: {
+        name: 'runtime',
+      },
       splitChunks: {
         cacheGroups: {
           vendor: {
@@ -51,7 +57,16 @@ module.exports = () => {
       },
 
       minimize: true,
-      minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
+      minimizer: [
+        new CssMinimizerPlugin(),
+        // new TerserPlugin(), //Расскоментировать! Для большего сжатия данных в файлах.
+      ],
     },
+
+    // performance: {
+    //   hints: false,
+    //   maxEntrypointSize: 512000,
+    //   maxAssetSize: 512000,
+    // },
   };
 };
