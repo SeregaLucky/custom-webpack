@@ -9,9 +9,6 @@ module.exports = () => {
 
     module: {
       rules: [
-        // {
-        //   sideEffects: true, // выключает тришейкинг! УДАЛИТЬ!!!!
-        // },
         {
           test: /\.js$/,
           include: /src/,
