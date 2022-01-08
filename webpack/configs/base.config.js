@@ -14,14 +14,6 @@ module.exports = (env, args) => {
     stats: 'minimal',
     devtool: prodMode ? 'source-map' : 'eval-cheap-source-map',
     context: paths.SRC_DIR,
-    // process: '0.11.10',
-
-    resolve: {
-      // extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      // alias: {
-      //   process: 'process/browser',
-      // },
-    },
 
     entry: './index.js',
 
