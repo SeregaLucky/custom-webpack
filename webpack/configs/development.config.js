@@ -1,3 +1,5 @@
+const { HotModuleReplacementPlugin } = require('webpack');
+
 module.exports = () => {
   return {
     stats: 'minimal',
@@ -21,12 +23,15 @@ module.exports = () => {
       ],
     },
 
-    plugins: [],
+    plugins: [
+      // new HotModuleReplacementPlugin()
+    ],
 
     devServer: {
       port: 3000,
       compress: true,
       historyApiFallback: true,
+      // hot: true,
     },
   };
 };
